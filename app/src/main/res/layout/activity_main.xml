@@ -163,4 +163,28 @@
         app:layout_constraintStart_toStartOf="@+id/oceanImageView"
         app:layout_constraintTop_toTopOf="@+id/oceanImageView"
         app:layout_constraintVertical_bias="0.878" />
+
+    <ImageView
+        android:id="@+id/serduszka1ImageView"
+        android:layout_width="250dp"
+        android:layout_height="245dp"
+        app:layout_constraintBottom_toBottomOf="@+id/button2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.898"
+        app:srcCompat="@drawable/serduszka" />
+
+    <ImageView
+        android:id="@+id/serduszka2ImageView"
+        android:layout_width="263dp"
+        android:layout_height="244dp"
+        app:layout_constraintBottom_toBottomOf="@+id/button2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.897"
+        app:srcCompat="@drawable/serduszka" />
 </androidx.constraintlayout.widget.ConstraintLayout>

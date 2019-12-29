@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
+import android.view.animation.AnimationUtils;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
@@ -25,6 +26,9 @@ ProgressBar vertical_progress_bar1;
     ImageView ryba1ImageView;
     ImageView ryba2ImageView;
     ImageView ryba3ImageView;
+    ImageView serduszka1ImageView;
+    ImageView serduszka2ImageView;
+    Animation animSlide;
     Button button1;
     Button button2;
     Button button3;
@@ -33,7 +37,7 @@ ProgressBar vertical_progress_bar1;
     RotateAnimation rotate1;
     RotateAnimation rotate2;
     ObjectAnimator animation;
-    ObjectAnimator animation1;
+
     TextView pieniądzeTextView;
     int xD=1;
     boolean ryba1Alive=true;
@@ -50,6 +54,8 @@ ProgressBar vertical_progress_bar1;
         ryba1ImageView=findViewById(R.id.ryba1ImageView);
         ryba2ImageView=findViewById(R.id.ryba2ImageView);
         ryba3ImageView=findViewById(R.id.ryba3ImageView);
+        serduszka1ImageView=findViewById(R.id.serduszka1ImageView);
+        serduszka2ImageView=findViewById(R.id.serduszka2ImageView);
         button1=findViewById(R.id.button1);
         button2=findViewById(R.id.button2);
         button3=findViewById(R.id.button3);
@@ -59,20 +65,20 @@ ProgressBar vertical_progress_bar1;
         rotate2 = new RotateAnimation(0,360, Animation.RELATIVE_TO_SELF,-0.8f,Animation.RELATIVE_TO_SELF,-0.8f);
 
 
-        animation = ObjectAnimator.ofFloat(ryba2ImageView,"translationX",-400f);
 
-        animation.setDuration(5000);
 
         rotate.setDuration(5000);
         rotate.setInterpolator(new LinearInterpolator());
         rotate1.setDuration(5000);
         rotate1.setInterpolator(new LinearInterpolator());
         pieniądzeTextView = findViewById(R.id.pieniądzeTextView);
-
+        animSlide = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.slide);
 
         vertical_progress_bar1.setProgress(10);
         vertical_progress_bar2.setProgress(10);
         vertical_progress_bar3.setProgress(10);
+        serduszka1ImageView.setVisibility(View.INVISIBLE);
+        serduszka2ImageView.setVisibility(View.INVISIBLE);
 
         guzik();
         hajs();
@@ -111,7 +117,10 @@ xD++;
                     vertical_progress_bar2.setProgress(vertical_progress_bar2.getProgress()+1);
                     vertical_progress_bar3.setProgress(vertical_progress_bar3.getProgress()+1);
                     xD-=20;
+                    hearts();
                 }
+
+
             }
         });
 
@@ -200,6 +209,27 @@ xD++;
 
 
     }
+
+    //Wyslij serduszka
+
+    public void hearts(){
+
+        serduszka1ImageView.startAnimation(animSlide);
+        serduszka2ImageView.startAnimation(animSlide);
+        serduszka1ImageView.animate().alpha(0).setDuration(3000).setInterpolator(new DecelerateInterpolator()).withEndAction(new Runnable() {
+            @Override
+            public void run() {
+                serduszka1ImageView.animate().alpha(1).setDuration(1000).setInterpolator(new AccelerateInterpolator()).start();
+            }
+        }).start();
+        serduszka2ImageView.animate().alpha(0).setDuration(3000).setInterpolator(new DecelerateInterpolator()).withEndAction(new Runnable() {
+            @Override
+            public void run() {
+                serduszka2ImageView.animate().alpha(1).setDuration(1000).setInterpolator(new AccelerateInterpolator()).start();
+            }
+        }).start();
+    }
+
 
     //Zabij 1 z 3 ryb ze zmeczenia
     public void zabijRybe(View view){
