@@ -3,13 +3,16 @@ package com.example.myapplication;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.animation.ObjectAnimator;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.os.Handler;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
-import android.view.animation.AnimationSet;
 import android.view.animation.AnimationUtils;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.LinearInterpolator;
@@ -36,7 +39,8 @@ ProgressBar vertical_progress_bar1;
     RotateAnimation rotate;
     RotateAnimation rotate1;
     RotateAnimation rotate2;
-    ObjectAnimator animation;
+
+
 
     TextView pieniądzeTextView;
     int xD=1;
@@ -83,6 +87,8 @@ ProgressBar vertical_progress_bar1;
         guzik();
         hajs();
         karmienie(karmienieButton);
+
+
 
     }
     //Zarabianie hajsu i wyswietlanie go
@@ -274,4 +280,80 @@ xD++;
             }
         }
     }
+
+    //Wskrzeszanie
+
+    //Czy ryba zyje
+//     public void wskrzeszanko(View view){
+//        if(ryba1Alive==false){
+//            ryba1Alive=true;
+//            Log.i("Kurwa mac to dziala","Jebana ryba powinna zyc");
+//            ryba1ImageView.setVisibility(View.VISIBLE);
+//            button1.setEnabled(true);
+//            vertical_progress_bar1.setProgress(10);
+//            ryba1ImageView.animate().alpha(0).setDuration(1000).setInterpolator(new DecelerateInterpolator()).withEndAction(new Runnable() {
+//                @Override
+//                public void run() {
+//                    ryba1ImageView.animate().alpha(1).setDuration(1000).setInterpolator(new AccelerateInterpolator()).start();
+//
+//                }
+//            }).start();
+//        }
+//        if(ryba2Alive==false){
+//            ryba2Alive=true;
+//            ryba2ImageView.setVisibility(View.VISIBLE);
+//            button2.setEnabled(true);
+//            vertical_progress_bar2.setProgress(10);
+//            ryba2ImageView.animate().alpha(0).setDuration(1000).setInterpolator(new DecelerateInterpolator()).withEndAction(new Runnable() {
+//                @Override
+//                public void run() {
+//                    ryba2ImageView.animate().alpha(1).setDuration(1000).setInterpolator(new AccelerateInterpolator()).start();
+//
+//                }
+//            }).start();
+//        }
+//        if(ryba3Alive==false){
+//            ryba3Alive=true;
+//            ryba3ImageView.setVisibility(View.VISIBLE);
+//            button3.setEnabled(true);
+//            vertical_progress_bar3.setProgress(10);
+//            ryba3ImageView.animate().alpha(0).setDuration(1000).setInterpolator(new DecelerateInterpolator()).withEndAction(new Runnable() {
+//                @Override
+//                public void run() {
+//                    ryba3ImageView.animate().alpha(1).setDuration(1000).setInterpolator(new AccelerateInterpolator()).start();
+//
+//                }
+//            }).start();
+//        }
+//
+//
+//
+//    }
+
+
+
+
+    //MENU
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menu,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+//Obsluga menu
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        super.onOptionsItemSelected(item);
+        if(item.getItemId() == R.id.wskrzeszanie){
+            Intent intent = new Intent(getApplicationContext(), lowisko.class);
+            startActivity(intent);
+            return true;
+        }
+        return false;
+    }
+
+
+
 }

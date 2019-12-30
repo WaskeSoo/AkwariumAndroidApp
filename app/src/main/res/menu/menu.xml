@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="Wskrzeszanie ryb" android:id="@+id/wskrzeszanie"></item>
+    <item android:title="Rybi cyrk" android:id="@+id/rybicyrk"></item>
+
+
+</menu>
