@@ -330,7 +330,13 @@ xD++;
 //
 //    }
 
-
+    //WIELKI PROBLEM HERE ------------------ WYLACZA APKE ALE WSKRZESZA RYBE? (BEZ UZUPELNIANIA PASKA)
+//Ustawianie hp po wskrzeszeniu
+    public void ustawienie(){
+        final int gethp = getIntent().getExtras().getInt("hp");
+        vertical_progress_bar1.setVisibility(View.VISIBLE);
+        vertical_progress_bar1.setProgress(gethp);
+    }
 
 
     //MENU
