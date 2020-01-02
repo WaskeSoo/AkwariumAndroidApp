@@ -39,14 +39,16 @@ ProgressBar vertical_progress_bar1;
     RotateAnimation rotate;
     RotateAnimation rotate1;
     RotateAnimation rotate2;
-
+public static Integer VPB1;
+public static Integer VPB2;
+public static Integer VPB3;
 
 
     TextView pieniądzeTextView;
     int xD=1;
-    boolean ryba1Alive=true;
-    boolean ryba2Alive=true;
-    boolean ryba3Alive=true;
+   public static boolean ryba1Alive=true;
+   public static boolean ryba2Alive=true;
+   public static boolean ryba3Alive=true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,8 +70,9 @@ ProgressBar vertical_progress_bar1;
         rotate1 = new RotateAnimation(0,360, Animation.RELATIVE_TO_SELF,0.8f,Animation.RELATIVE_TO_SELF,0.8f);
         rotate2 = new RotateAnimation(0,360, Animation.RELATIVE_TO_SELF,-0.8f,Animation.RELATIVE_TO_SELF,-0.8f);
 
-
-
+        VPB1=0;
+        VPB2=0;
+        VPB3=0;
 
         rotate.setDuration(5000);
         rotate.setInterpolator(new LinearInterpolator());
@@ -88,17 +91,16 @@ ProgressBar vertical_progress_bar1;
         hajs();
         karmienie(karmienieButton);
 
-
-
     }
-    //Zarabianie hajsu i wyswietlanie go
+
+    //Zarabianie hajsu i wyswietlanie go + sprawdzanie czy zaszla zmiana z rybą
     public void hajs(){
 
   CountDownTimer x=new CountDownTimer(1000,1000) {
 
     @Override
     public void onTick(long l) {
-
+        czyZmiana();
         pieniądzeTextView.setText(String.valueOf("Twoje pieniądze: "+xD));
     }
 
@@ -112,16 +114,58 @@ xD++;
 };
         x.start();
     }
+    //Funkcja sprawdzająca czy zaszla zmiana z rybą i jak coś to przyzwać
+    public void czyZmiana() {
+        if (vertical_progress_bar1.getProgress() <= 0) {
+            vertical_progress_bar1.setProgress(VPB1);
+            vertical_progress_bar1.setVisibility(View.VISIBLE);
+            ryba1ImageView.animate().alpha(0).setDuration(1000).setInterpolator(new DecelerateInterpolator()).withEndAction(new Runnable() {
+                @Override
+                public void run() {
+                    ryba1ImageView.animate().alpha(1).setDuration(1000).setInterpolator(new AccelerateInterpolator()).start();
+
+                }
+            });
+            if(ryba1Alive==true)button1.setEnabled(true);
+            VPB1=0;
+        }
+        if (vertical_progress_bar2.getProgress() <= 0) {
+            vertical_progress_bar2.setProgress(VPB2);
+            vertical_progress_bar2.setVisibility(View.VISIBLE);
+            ryba2ImageView.animate().alpha(0).setDuration(1000).setInterpolator(new DecelerateInterpolator()).withEndAction(new Runnable() {
+                @Override
+                public void run() {
+                    ryba2ImageView.animate().alpha(1).setDuration(1000).setInterpolator(new AccelerateInterpolator()).start();
+
+                }
+            });
+            if(ryba2Alive==true)button2.setEnabled(true);
+            VPB2=0;
+        }
+        if (vertical_progress_bar3.getProgress() <= 0) {
+            vertical_progress_bar3.setProgress(VPB1);
+            vertical_progress_bar3.setVisibility(View.VISIBLE);
+            ryba3ImageView.animate().alpha(0).setDuration(1000).setInterpolator(new DecelerateInterpolator()).withEndAction(new Runnable() {
+                @Override
+                public void run() {
+                    ryba3ImageView.animate().alpha(1).setDuration(1000).setInterpolator(new AccelerateInterpolator()).start();
+
+                }
+            });
+            if(ryba3Alive==true)button3.setEnabled(true);
+            VPB3=0;
+        }
+    }
+
 //Przycisk karmienia
     public void karmienie(View view){
         karmienieButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(xD>=20){
-
-                    vertical_progress_bar1.setProgress(vertical_progress_bar1.getProgress()+1);
-                    vertical_progress_bar2.setProgress(vertical_progress_bar2.getProgress()+1);
-                    vertical_progress_bar3.setProgress(vertical_progress_bar3.getProgress()+1);
+                    if(ryba1Alive==true)vertical_progress_bar1.setProgress(vertical_progress_bar1.getProgress()+1);
+                    if(ryba2Alive==true)vertical_progress_bar2.setProgress(vertical_progress_bar2.getProgress()+1);
+                    if(ryba3Alive==true)vertical_progress_bar3.setProgress(vertical_progress_bar3.getProgress()+1);
                     xD-=20;
                     hearts();
                 }
@@ -129,8 +173,6 @@ xD++;
 
             }
         });
-
-
     }
 
     //Ktory z przyciskow ma dzialac
@@ -173,8 +215,6 @@ xD++;
         button1.setEnabled(false);
         button2.setEnabled(false);
         button3.setEnabled(false);
-
-
     }
         if(view==ryba2ImageView){
             ryba2ImageView.startAnimation(rotate);
@@ -211,9 +251,6 @@ xD++;
                 }else vertical_progress_bar3.setVisibility(View.INVISIBLE);
             }
         }.start();
-
-
-
     }
 
     //Wyslij serduszka
@@ -279,63 +316,6 @@ xD++;
 
             }
         }
-    }
-
-    //Wskrzeszanie
-
-    //Czy ryba zyje
-//     public void wskrzeszanko(View view){
-//        if(ryba1Alive==false){
-//            ryba1Alive=true;
-//            Log.i("Kurwa mac to dziala","Jebana ryba powinna zyc");
-//            ryba1ImageView.setVisibility(View.VISIBLE);
-//            button1.setEnabled(true);
-//            vertical_progress_bar1.setProgress(10);
-//            ryba1ImageView.animate().alpha(0).setDuration(1000).setInterpolator(new DecelerateInterpolator()).withEndAction(new Runnable() {
-//                @Override
-//                public void run() {
-//                    ryba1ImageView.animate().alpha(1).setDuration(1000).setInterpolator(new AccelerateInterpolator()).start();
-//
-//                }
-//            }).start();
-//        }
-//        if(ryba2Alive==false){
-//            ryba2Alive=true;
-//            ryba2ImageView.setVisibility(View.VISIBLE);
-//            button2.setEnabled(true);
-//            vertical_progress_bar2.setProgress(10);
-//            ryba2ImageView.animate().alpha(0).setDuration(1000).setInterpolator(new DecelerateInterpolator()).withEndAction(new Runnable() {
-//                @Override
-//                public void run() {
-//                    ryba2ImageView.animate().alpha(1).setDuration(1000).setInterpolator(new AccelerateInterpolator()).start();
-//
-//                }
-//            }).start();
-//        }
-//        if(ryba3Alive==false){
-//            ryba3Alive=true;
-//            ryba3ImageView.setVisibility(View.VISIBLE);
-//            button3.setEnabled(true);
-//            vertical_progress_bar3.setProgress(10);
-//            ryba3ImageView.animate().alpha(0).setDuration(1000).setInterpolator(new DecelerateInterpolator()).withEndAction(new Runnable() {
-//                @Override
-//                public void run() {
-//                    ryba3ImageView.animate().alpha(1).setDuration(1000).setInterpolator(new AccelerateInterpolator()).start();
-//
-//                }
-//            }).start();
-//        }
-//
-//
-//
-//    }
-
-    //WIELKI PROBLEM HERE ------------------ WYLACZA APKE ALE WSKRZESZA RYBE? (BEZ UZUPELNIANIA PASKA)
-//Ustawianie hp po wskrzeszeniu
-    public void ustawienie(){
-        final int gethp = getIntent().getExtras().getInt("hp");
-        vertical_progress_bar1.setVisibility(View.VISIBLE);
-        vertical_progress_bar1.setProgress(gethp);
     }
 
 

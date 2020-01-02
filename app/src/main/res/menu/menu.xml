@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item android:title="Wskrzeszanie ryb" android:id="@+id/wskrzeszanie"></item>
-    <item android:title="Rybi cyrk" android:id="@+id/rybicyrk"></item>
+
 
 
 </menu>
