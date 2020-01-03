@@ -3,7 +3,9 @@ package com.example.myapplication;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.animation.ObjectAnimator;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
@@ -39,6 +41,8 @@ ProgressBar vertical_progress_bar1;
     RotateAnimation rotate;
     RotateAnimation rotate1;
     RotateAnimation rotate2;
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
 public static Integer VPB1;
 public static Integer VPB2;
 public static Integer VPB3;
@@ -86,6 +90,9 @@ public static Integer VPB3;
         vertical_progress_bar3.setProgress(10);
         serduszka1ImageView.setVisibility(View.INVISIBLE);
         serduszka2ImageView.setVisibility(View.INVISIBLE);
+        
+        sharedPreferences = this.getPreferences(Context.MODE_PRIVATE);
+        editor = sharedPreferences.edit();
 
         guzik();
         hajs();
@@ -93,6 +100,24 @@ public static Integer VPB3;
 
     }
 
+//    @Override
+//    protected void onPause() {
+//        super.onPause();
+//
+//        sharedPreferences = this.getPreferences(Context.MODE_PRIVATE);
+//        editor = sharedPreferences.edit();
+//        editor.putInt("hajs",xD);
+//        editor.commit();
+//
+//    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        sharedPreferences = this.getPreferences(Context.MODE_PRIVATE);
+        xD = sharedPreferences.getInt("hajs", 0);
+    }
     //Zarabianie hajsu i wyswietlanie go + sprawdzanie czy zaszla zmiana z rybą
     public void hajs(){
 
@@ -102,6 +127,9 @@ public static Integer VPB3;
     public void onTick(long l) {
         czyZmiana();
         pieniądzeTextView.setText(String.valueOf("Twoje pieniądze: "+xD));
+
+        editor.putInt("hajs",xD);
+        editor.commit();
     }
 
     @Override
@@ -334,6 +362,11 @@ xD++;
         super.onOptionsItemSelected(item);
         if(item.getItemId() == R.id.wskrzeszanie){
             Intent intent = new Intent(getApplicationContext(), lowisko.class);
+            startActivity(intent);
+            return true;
+        }
+        if(item.getItemId() == R.id.premium){
+            Intent intent = new Intent(getApplicationContext(), premium.class);
             startActivity(intent);
             return true;
         }
