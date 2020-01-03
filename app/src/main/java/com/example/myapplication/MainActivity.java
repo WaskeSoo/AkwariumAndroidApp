@@ -49,7 +49,7 @@ public static Integer VPB3;
 
 
     TextView pieniądzeTextView;
-    int xD=1;
+    public static int xD=1;
    public static boolean ryba1Alive=true;
    public static boolean ryba2Alive=true;
    public static boolean ryba3Alive=true;

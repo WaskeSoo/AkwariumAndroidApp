@@ -12,10 +12,10 @@
         android:layout_height="0dp"
         android:text="Premium Content (500)"
         android:textSize="40sp"
-        android:visibility="invisible"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
@@ -24,7 +24,7 @@
         android:id="@+id/naglowekTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Teperatura dla Gdańska:"
+        android:text="Temperatura dla Gdańska:"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="@+id/premiumButton"
         app:layout_constraintEnd_toEndOf="@+id/premiumButton"
@@ -44,4 +44,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/naglowekTextView"
         app:layout_constraintVertical_bias="0.065" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/naglowekTextView"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/haveaniceday" />
 </androidx.constraintlayout.widget.ConstraintLayout>
